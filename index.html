@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Howgan Studio</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Cairo:wght@600;700;800&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: "Cairo", "Poppins", sans-serif;
+        }
+
+        body {
+            /* أزرق ليلي غامق */
+            background-color: #06081F;
+            /* أبيض نقي */
+            color: #FFFFFF;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 100px;            
+            height: 100px;          
+            border-radius: 50%;
+            padding: 5px;
+            object-fit: cover;
+            border: 2px solid #3B52E8; /* أزرق كهربائي مشع */
+        }
+
+        .navigation ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navigation a {
+            display: inline-block;
+            text-decoration: none;
+            color: #FFFFFF; /* أبيض نقي */
+            font-weight: bold;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .navigation a:hover {
+            /* أزرق ملكي عند التمرير */
+            background-color: #1B2A99;
+            color: #FFFFFF;
+        }
+
+        hr {
+            opacity: 0.3;
+            border: none;
+            /* أزرق كهربائي مشع للفاصل */
+            border-top: 1px solid #3B52E8;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1.5rem;
+            min-height: 70vh;
+            padding: 2rem 10%;
+            position: relative;
+        }
+
+        .heroesub {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: right;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            opacity: 0.85;
+            font-weight: 600;
+        }
+
+        .name {
+            font-size: 4rem;
+            /* أزرق كهربائي مشع للعنوان الرئيسي */
+            color: #3B52E8;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .arrow {
+            width: 55px;
+            height: auto;
+            transform: rotate(-75deg);
+            opacity: 0.7;
+            margin-top: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .heroes-section {
+            padding: 50px 10%; 
+            text-align: right; 
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .heroes-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #3B52E8; /* أزرق كهربائي مشع */
+            margin-bottom: 10px;
+        }
+
+        .heroes-section p {
+            font-size: 18px;
+            color: #FFFFFF; 
+            margin-bottom: 30px;
+        }
+
+        .heroes-container {
+            display: flex;
+            justify-content: flex-start; 
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 20px 0;
+        }
+
+        .hero-card {
+            color: #FFFFFF;
+            font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            /* أزرق نيلي داكن لخلفية البطاقات */
+            background: #0F165A;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            max-width: 340px; /* تم زيادة العرض لاستيعاب البوستر */
+            width: 100%;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* أزرق ملكي للحدود */
+            border: 1px solid #1B2A99;
+        }
+
+        .hero-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            margin-top: 8px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .hero-card h3 {
+            margin-top: 15px;
+            font-size: 1.4rem;
+            color: #FFFFFF;
+        }
+
+        .hero-card h1 {
+            color: #3B52E8;
+            font-size: 1.8rem;
+            margin-top: 15px;
+        }
+
+        /* تعديل بوستر بطل للمستطيل 4:5 */
+        .hero-card img {
+            width: 100%;
+            max-width: 240px;
+            aspect-ratio: 3072 / 3840; /* يحافظ بدقة على نسبة أبعاد البوستر الأصلي */
+            height: auto;
+            border-radius: 12px; /* زوايا مستطيلة منحنية بحرافية */
+            object-fit: cover;
+            border: 2px solid #3B52E8;
+            transition: transform 0.4s ease;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-12px);
+            /* ظلال أزرق ملكي مشع عند التمرير */
+            box-shadow: 0 15px 30px rgba(59, 82, 232, 0.25);
+            border-color: #3B52E8;
+        }
+
+        .hero-card:hover img {
+            transform: scale(1.04);
+        }
+
+        /* تنسيق زر IMDb */
+        .imdb-link {
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .imdb-link p {
+            display: inline-block;
+            background-color: #F5C518; /* لون IMDb الأصفر الشهير */
+            color: #000000; /* نص أسود مباين */
+            font-family: "Poppins", sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+            padding: 6px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+        }
+
+        .imdb-link:hover p {
+            background-color: #FFFFFF;
+            color: #06081F;
+            box-shadow: 0 4px 15px rgba(245, 197, 24, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ==================== تنسيقات قسم معلومات ==================== */
+        .info-section {
+            padding: 50px 10%;
+            text-align: right;
+        }
+
+        .info-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #3B52E8;
+            margin-bottom: 25px;
+        }
+
+        .info-subtitle {
+            font-size: 1.4rem;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            display: inline-block;
+            border-bottom: 2px solid #3B52E8;
+            padding-bottom: 5px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            padding: 10px 0;
+        }
+
+        .collaborations-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+
+        .collaborations-container .member-card {
+            min-width: 260px;
+            max-width: 320px;
+        }
+
+        .member-card {
+            background: #0F165A;
+            border: 1px solid #1B2A99;
+            border-radius: 18px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .member-card:hover {
+            transform: translateY(-8px);
+            border-color: #3B52E8;
+            box-shadow: 0 12px 25px rgba(59, 82, 232, 0.2);
+        }
+
+        .member-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3B52E8;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover .member-img {
+            transform: scale(1.05);
+        }
+
+        .member-role {
+            color: #3B52E8;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .member-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        /* ==================== تنسيقات الفوتر ==================== */
+        .site-footer {
+            background: #0A0D33;
+            border-top: 1px solid #1B2A99;
+            padding: 3rem 10% 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            color: #3B52E8;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .footer-social {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .footer-social-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .social-icons {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: #0F165A;
+            border: 1px solid #1B2A99;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .social-card img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover {
+            background: #1B2A99;
+            border-color: #3B52E8;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(59, 82, 232, 0.3);
+        }
+
+        .social-card:hover img {
+            transform: scale(1.15);
+        }
+
+        .footer-bottom {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(59, 82, 232, 0.15);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .footer-social {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo-link">
+            <img src="logo.jpg" alt="logo" class="logo-img"/>
+        </a>
+
+        <nav class="navigation">
+            <ul>
+                <li><a href="#aboutUs">عنا</a></li>
+                <li><a href="#Myworks">أعمالنا</a></li> 
+                <li><a href="#info">معلومات</a></li>  
+                <li><a href="#contact">تواصل</a></li>    
+            </ul>
+        </nav>
+    </header>
+    <hr>
+
+    <section id="aboutUs" class="hero">
+        <div class="heroesub">
+            <h3 class="title">مرحبا بكم، نحن</h3>
+            <h2 class="name">Howgan Studio</h2>
+            <br>
+            <p class="title" style="font-size: 2rem; opacity: 1;">ستوديو انميشن مستقل مصري</p>
+            <p class="title" style="font-size: 2rem; opacity: 1;">يقدم اعمال الانميشن بشكل مختلف و عالي الجودة</p>
+            <p class="title" style="font-size: 2rem; opacity: 1;"> ، من ضمن أعمالنا هو "بطل"</p>
+        </div>    
+    </section>
+
+    <hr>
+
+    <section id="Myworks" class="heroes-section">
+        <h2>أعمالنا</h2>
+
+        <div class="heroes-container">
+            <!-- بطل -->
+            <div class="hero-card card-channel">
+                <a href="https://youtube.com/playlist?list=PL_DSp4HP2_GJH8l7jQtZe9QAvtkjYBOHB&si=lU2PxmSDNfwFKnmL" target="_blank">
+                    <img src="batal poster.png" alt="بوستر بطل"/>
+                </a>
+                <h3>بطل</h3>
+                <p>في خلال ٢٤ ساعة كل شيء تم تدميره و على بطل بإصلاح كل شيء، فماذا سيفعل؟</p>
+                <a href="https://www.imdb.com/title/tt37675188?ref_=ext_shr_lnk" target="_blank" class="imdb-link">
+                    <p>IMDb</p>
+                </a>
+            </div>
+
+            <!-- كيان -->
+            <div class="hero-card card-channel">
+                <a href="" target="_blank">
+                    <img src="kayan teaser poster.png" alt="بوستر كيان"/>
+                </a>
+                <h3>كيان</h3>
+                <h1>قريباً</h1>
+            </div>
+
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- قسم معلومات (فريق العمل والتعاونات) -->
+    <section id="info" class="info-section">
+        <h2>معلومات</h2>
+
+        <!-- عنوان فرعي لفريق العمل -->
+        <h3 class="info-subtitle">فريق العمل</h3>
+        <div class="team-container">
+            <!-- مالك الاستوديو -->
+            <div class="member-card">
+                <img src="Omar ahmed.jpg" alt="عمر أحمد" class="member-img"/>
+                <div class="member-role">مالك الاستوديو</div>
+                <div class="member-name">عمر أحمد</div>
+            </div>
+
+            <!-- الكاتب الأساسي -->
+            <div class="member-card">
+                <img src="abdelaziz omar.jpg" alt="عبد العزيز عمر" class="member-img"/>
+                <div class="member-role">الكاتب الأساسي</div>
+                <div class="member-name">عبد العزيز عمر</div>
+            </div>
+
+            <!-- صانع الموسيقى التصويرية -->
+            <div class="member-card">
+                <img src="ahmed magdi.jpg" alt="أحمد مجدي" class="member-img"/>
+                <div class="member-role">الموسيقى التصويرية</div>
+                <div class="member-name">أحمد مجدي</div>
+            </div>
+        </div>
+
+
+        <hr>
+
+        <!-- عنوان فرعي للتعاونات -->
+        <h3 class="info-subtitle" style="margin-top: 40px;">التعاونات</h3>
+        <div class="collaborations-container">
+            <!-- Shift Studio -->
+            <div class="member-card">
+                <img src="shift_studio.jpg" alt="Shift Studio" class="member-img"/>
+                <div class="member-role">شريك إبداعي / استوديو تعاوني</div>
+                <div class="member-name">Shift Studio</div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="site-footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Howgan Studio</h3>
+                <p>ستوديو انميشن مستقل يبتكر تجارب بصرية فريدة.</p>
+            </div>
+
+            <div class="footer-social">
+                <span class="footer-social-title">تواصل معنا</span>
+                <ul class="social-icons">
+                    <li>
+                        <a href="https://www.instagram.com/howgan_studios?igsh=M3c4cnpkZ3l5emRn" target="_blank" class="social-card" title="انستغرام">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram"/>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/@howgan" target="_blank" class="social-card" title="يوتيوب">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; جميع الحقوق محفوظة لـ Howgan Studio.</p>
+            <p><strong>Mohammed Amin</strong> : web developer</p>
+        </div>
+    </footer>
+
+</body>
+</html>
