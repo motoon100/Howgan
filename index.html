@@ -22,7 +22,6 @@
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
-            /* توحيد الخط المجلوب من المنصة على جميع العناصر مع خط Cairo كاحتياطي */
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
         }
 
@@ -34,34 +33,54 @@
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
         }
 
-        /* ==================== تنسيق البانر المكرر بالتناوب مع Flip Horizontal ==================== */
+        /* ==================== تنسيق البانر الخلفي الممكون ==================== */
         .top-banner {
+            position: relative; /* ليتيح وضع الهيدر داخله بالكامل فوق الخلفية */
             width: 100%;
-            height: 120px; /* يمكنك التحكم في ارتفاع البانر */
+            min-height: 160px; /* تم زيادة الارتفاع ليستوعب اللوجو والأزرار بجمالية */
             display: flex;
             overflow: hidden;
             background-color: #1505FF;
+            align-items: center;
+        }
+
+        /* الطبقة الخلفية للصور المكررة */
+        .banner-tiles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: 1;
         }
 
         .banner-tile {
             height: 100%;
-            aspect-ratio: 1 / 1; /* لأن الصورة مربعة */
+            aspect-ratio: 1 / 1;
             background-image: url('banner.png');
             background-size: cover;
             background-position: center;
             flex-shrink: 0;
         }
 
-        /* عمل Flip Horizontal أفقياً على كل عنصر زوجي لضمان السلاسة والتناسق */
+        /* عمل Flip Horizontal أفقياً على كل عنصر زوجي لضمان السلاسة */
         .banner-tile:nth-child(even) {
             transform: scaleX(-1);
         }
 
+        /* ==================== الهيدر واللوجو والأقسام فوق البانر ==================== */
         header {
+            position: relative;
+            z-index: 2; /* يضمن ظهور اللوجو والأزرار فوق صور البانر */
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 5%;
+            /* شفاف خام بدون خلفية أو blur */
+            background: transparent;
+            backdrop-filter: none;
         }
 
         .logo-link {
@@ -77,6 +96,7 @@
             padding: 5px;
             object-fit: cover;
             border: 2px solid #3B52E8; /* أزرق كهربائي مشع */
+            background-color: #06081F;
         }
 
         .navigation ul {
@@ -90,24 +110,25 @@
         .navigation a {
             display: inline-block;
             text-decoration: none;
-            color: #FFFFFF; /* أبيض نقي */
+            color: #FFFFFF;
             font-weight: bold;
             padding: 0.5rem 1.2rem;
             border-radius: 30px;
+            background-color: rgba(6, 8, 31, 0.6); /* خلفية داكنة خفيفة للأزرار لوضوح الخط */
+            border: 1px solid rgba(59, 82, 232, 0.4);
             transition: all 0.3s ease;
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
         }
 
         .navigation a:hover {
-            /* أزرق ملكي عند التمرير */
-            background-color: #1B2A99;
+            background-color: #3B52E8;
             color: #FFFFFF;
+            box-shadow: 0 0 15px rgba(59, 82, 232, 0.6);
         }
 
         hr {
             opacity: 0.3;
             border: none;
-            /* أزرق كهربائي مشع للفاصل */
             border-top: 1px solid #3B52E8;
         }
 
@@ -138,20 +159,10 @@
 
         .name {
             font-size: 4rem;
-            /* أزرق كهربائي مشع للعنوان الرئيسي */
             color: #3B52E8;
             font-weight: 800;
             line-height: 1.1;
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
-        }
-
-        .arrow {
-            width: 55px;
-            height: auto;
-            transform: rotate(-75deg);
-            opacity: 0.7;
-            margin-top: 1.5rem;
-            transition: transform 0.3s ease;
         }
 
         .heroes-section {
@@ -163,15 +174,8 @@
         .heroes-section h2 {
             font-size: 32px;
             font-weight: 700;
-            color: #3B52E8; /* أزرق كهربائي مشع */
+            color: #3B52E8;
             margin-bottom: 10px;
-            font-family: "thmanyahsans-Light", "Cairo", sans-serif;
-        }
-
-        .heroes-section p {
-            font-size: 18px;
-            color: #FFFFFF; 
-            margin-bottom: 30px;
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
         }
 
@@ -188,17 +192,15 @@
             font-size: 16px;
             margin-bottom: 30px;
             font-weight: 600;
-            /* أزرق نيلي داكن لخلفية البطاقات */
             background: #0F165A;
             border-radius: 20px;
             padding: 2rem 1.5rem;
-            max-width: 340px; /* تم زيادة العرض لاستيعاب البوستر */
+            max-width: 340px;
             width: 100%;
             text-align: center;
             position: relative;
             backdrop-filter: blur(8px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            /* أزرق ملكي للحدود */
             border: 1px solid #1B2A99;
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
         }
@@ -226,13 +228,12 @@
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
         }
 
-        /* تعديل بوستر بطل للمستطيل 4:5 */
         .hero-card img {
             width: 100%;
             max-width: 240px;
-            aspect-ratio: 3072 / 3840; /* يحافظ بدقة على نسبة أبعاد البوستر الأصلي */
+            aspect-ratio: 3072 / 3840;
             height: auto;
-            border-radius: 12px; /* زوايا مستطيلة منحنية بحرافية */
+            border-radius: 12px;
             object-fit: cover;
             border: 2px solid #3B52E8;
             transition: transform 0.4s ease;
@@ -241,7 +242,6 @@
 
         .hero-card:hover {
             transform: translateY(-12px);
-            /* ظلال أزرق ملكي مشع عند التمرير */
             box-shadow: 0 15px 30px rgba(59, 82, 232, 0.25);
             border-color: #3B52E8;
         }
@@ -250,7 +250,6 @@
             transform: scale(1.04);
         }
 
-        /* تنسيق زر IMDb */
         .imdb-link {
             display: inline-block;
             text-decoration: none;
@@ -259,8 +258,8 @@
 
         .imdb-link p {
             display: inline-block;
-            background-color: #F5C518; /* لون IMDb الأصفر الشهير */
-            color: #000000; /* نص أسود مباين */
+            background-color: #F5C518;
+            color: #000000;
             font-family: "thmanyahsans-Light", "Cairo", sans-serif;
             font-weight: 800;
             font-size: 14px;
@@ -468,14 +467,12 @@
             margin-bottom: 5px;
         }
 
-        /* ==================== Responsive Media Queries للهواتف والأجهزة الصغرى ==================== */
+        /* ==================== Responsive Media Queries ==================== */
         @media (max-width: 768px) {
-            /* البانر العلوي */
             .top-banner {
-                height: 70px;
+                min-height: auto;
             }
 
-            /* الهيدر والقائمة */
             header {
                 flex-direction: column;
                 gap: 1rem;
@@ -498,7 +495,6 @@
                 font-size: 0.9rem;
             }
 
-            /* قسم الترحيب Hero */
             .hero {
                 min-height: auto;
                 padding: 3rem 5%;
@@ -517,7 +513,6 @@
                 font-size: 2.5rem;
             }
 
-            /* قسم الأعمال */
             .heroes-section {
                 padding: 30px 5%;
                 text-align: center;
@@ -532,7 +527,6 @@
                 max-width: 100%;
             }
 
-            /* قسم معلومات */
             .info-section {
                 padding: 30px 5%;
                 text-align: center;
@@ -546,7 +540,6 @@
                 max-width: 100%;
             }
 
-            /* الفوتر */
             .footer-container {
                 flex-direction: column;
                 text-align: center;
@@ -571,40 +564,45 @@
 </head>
 <body>
 
-    <!-- البانر المكرر مع Flip أفقياً بالتناوب لضمان الاتصال السلس -->
+    <!-- البانر المكرر يغطي خلفية الهيدر واللوجو وقائمة التنقل كاملاً -->
     <div class="top-banner">
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
-        <div class="banner-tile"></div>
+        <!-- طبقة البلاطات المكررة أفقياً -->
+        <div class="banner-tiles-container">
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+            <div class="banner-tile"></div>
+        </div>
+
+        <!-- الهيدر مستقر فوق البانر بدون بلور ولا خلفية -->
+        <header>
+            <a href="https://www.youtube.com/@howgan" target="_blank" class="logo-link">
+                <img src="logo.jpg" alt="logo" class="logo-img"/>
+            </a>
+
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#aboutUs">عنا</a></li>
+                    <li><a href="#Myworks">أعمالنا</a></li> 
+                    <li><a href="#info">معلومات</a></li>  
+                    <li><a href="#contact">تواصل</a></li>    
+                </ul>
+            </nav>
+        </header>
     </div>
 
-    <header>
-        <a href="#" class="logo-link">
-            <img src="logo.jpg" alt="logo" class="logo-img"/>
-        </a>
-
-        <nav class="navigation">
-            <ul>
-                <li><a href="#aboutUs">عنا</a></li>
-                <li><a href="#Myworks">أعمالنا</a></li> 
-                <li><a href="#info">معلومات</a></li>  
-                <li><a href="#contact">تواصل</a></li>    
-            </ul>
-        </nav>
-    </header>
     <hr>
 
     <section id="aboutUs" class="hero">
@@ -678,7 +676,6 @@
                 <div class="member-name">أحمد مجدي</div>
             </div>
         </div>
-
 
         <hr>
 
